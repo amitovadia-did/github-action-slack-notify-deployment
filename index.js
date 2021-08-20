@@ -11,6 +11,7 @@ const { buildSlackAttachments, formatChannelName } = require('./src/utils');
     const tag = core.getInput('tag');
     const projectName = core.getInput('project_name');
     const actor = core.getInput('actor');
+    const message = core.getInput('actor');
     const repoUrl = core.getInput('repo_url');
     const token = process.env.SLACK_BOT_TOKEN;
     const slack = new WebClient(token);
@@ -20,7 +21,7 @@ const { buildSlackAttachments, formatChannelName } = require('./src/utils');
       return;
     }
 
-    const attachments = buildSlackAttachments({ status, color, tag, projectName, actor, repoUrl });
+    const attachments = buildSlackAttachments({ status, color, tag, projectName, actor, repoUrl, message });
     const channelId = core.getInput('channel_id') || (await lookUpChannelId({ slack, channel }));
 
     if (!channelId) {
