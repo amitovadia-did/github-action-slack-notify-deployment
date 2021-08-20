@@ -1,4 +1,4 @@
-name: 'Slack Notify Deployment'
+name: 'Slack Deployment Message'
 description: 'Report GitHub Actions deployment status on Slack'
 branding:
   icon: message-square
@@ -31,6 +31,9 @@ inputs:
     required: false
   repo_url:
     description: 'Override the repository URL.'
+    required: false
+  message:
+    description: 'Message to slack notification'
     required: false
 outputs:
   message_id:

@@ -1,8 +1,8 @@
-# Contribution Guidelines for Slack Notify Deployment
+# Contribution Guidelines for Slack Deployment Message
 
 ## Issues and Feature Requests
 
-To report bugs or to request new features, you may [create a new issue](https://github.com/Discontract/github-action-slack-notify-deployment/issues) on the repository. Our team will do its best to respond to your request, but we cannot guarantee a response or a solution.
+To report bugs or to request new features, you may [create a new issue](https://github.com/maikvortx/github-action-slack-notify-deployment/issues) on the repository. Our team will do its best to respond to your request, but we cannot guarantee a response or a solution.
 
 ## Releasing a New Version
 
@@ -39,4 +39,4 @@ git push origin :refs/tags/vX
 git push && git push --tags
 ```
 
-Finally, issue a [new GitHub release](https://github.com/Discontract/github-action-slack-notify-deployment/releases) for the corresponding version, detailing what has changed.
+Finally, issue a [new GitHub release](https://github.com/maikvortx/github-action-slack-notify-deployment/releases) for the corresponding version, detailing what has changed.
