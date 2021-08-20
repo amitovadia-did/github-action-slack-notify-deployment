@@ -7,7 +7,7 @@ A [Slack bot token](https://api.slack.com/docs/token-types) is required to use t
 ## Usage
 
 ```yaml
-uses: Discontract/github-action-slack-notify-deployment@v1
+uses: maikvortx/github-action-slack-notify-deployment@v1
 with:
   channel: deployments
   status: STARTED
@@ -30,7 +30,7 @@ Note: You must assign a step `id` to the first Slack notification step in order 
   id: slack # IMPORTANT: reference this step ID value in future Slack steps
   env:
     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-  uses: Discontract/github-action-slack-notify-deployment@v1
+  uses: maikvortx/github-action-slack-notify-deployment@v1
   with:
     channel: deployments
     status: STARTING
@@ -42,7 +42,7 @@ Note: You must assign a step `id` to the first Slack notification step in order 
   if: success()
   env:
     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-  uses: Discontract/github-action-slack-notify-deployment@v1
+  uses: maikvortx/github-action-slack-notify-deployment@v1
   with:
     # Updates existing message from the first step
     message_id: ${{ steps.slack.outputs.message_id }}
@@ -62,7 +62,7 @@ You can use the `success()` and `failure()` conditional checks within your workf
   if: success()
   env:
     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-  uses: Discontract/github-action-slack-notify-deployment@v1
+  uses: maikvortx/github-action-slack-notify-deployment@v1
   with:
     channel: deployments
     status: SUCCESS
@@ -72,7 +72,7 @@ You can use the `success()` and `failure()` conditional checks within your workf
   if: failure()
   env:
     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-  uses: Discontract/github-action-slack-notify-deployment@v1
+  uses: maikvortx/github-action-slack-notify-deployment@v1
   with:
     channel: deployments
     status: FAILED
