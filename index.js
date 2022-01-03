@@ -40,9 +40,12 @@ const { buildSlackAttachments, formatChannelName } = require('./src/utils');
     }
 
     const apiMethod = Boolean(messageId) ? 'update' : 'postMessage';
-
+    const success = status == 'Success'
+    const previewMessage = `${success ? ":white_check_mark:" : ":x:"} Deployment to ${environment} ${success ? "succeeded" : "failed"}.`
+    
     const args = {
       channel: channelId,
+      text: previewMessage
       attachments,
     };
 
