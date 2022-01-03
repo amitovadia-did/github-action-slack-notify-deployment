@@ -175,7 +175,7 @@ const { buildSlackAttachments, formatChannelName } = __nccwpck_require__(743);
     
     const args = {
       channel: channelId,
-      text: previewMessage,
+      blocks: [{"type": "section", "text": {"type": "mrkdwn", "text": previewMessage}}],
       attachments,
     };
 

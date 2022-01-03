@@ -45,7 +45,7 @@ const { buildSlackAttachments, formatChannelName } = require('./src/utils');
     
     const args = {
       channel: channelId,
-      text: previewMessage,
+      blocks: [{"type": "section", "text": {"type": "mrkdwn", "text": previewMessage}}],
       attachments,
     };
 
