@@ -32667,7 +32667,7 @@ function buildSlackAttachments({ status, color, commit, projectName, actor, repo
         },
         {
           title: 'Commit',
-          value: tag ? `<${repoUrl}/commit/${commit} | ${commit.substring(0, 7)}>` : 'no tag',
+          value: commit ? `<${repoUrl}/commit/${commit} | ${commit.substring(0, 7)}>` : 'no commit',
           short: false,
         },
         {
