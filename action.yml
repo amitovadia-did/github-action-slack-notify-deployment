@@ -20,8 +20,8 @@ inputs:
   message_id:
     description: 'The ID of the existing Slack message to update.'
     required: false
-  tag:
-    description: 'Tag of the Docker image being deployed.'
+  commit:
+    description: 'Sha of the commit being deployed'
     required: true
   project_name:
     description: 'Override the project name.'
@@ -31,9 +31,6 @@ inputs:
     required: false
   repo_url:
     description: 'Override the repository URL.'
-    required: false
-  message:
-    description: 'Message to slack notification'
     required: false
 outputs:
   message_id:

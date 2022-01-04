@@ -32940,15 +32940,17 @@ const { buildSlackAttachments, formatChannelName } = __nccwpck_require__(743);
     }
 
     const apiMethod = Boolean(messageId) ? 'update' : 'postMessage';
-    const success = status == 'Success'
-    const previewMessage = `${success ? ":white_check_mark:" : ":x:"} Deployment to ${environment} ${success ? "succeeded" : "failed"}.`
-    console.log(previewMessage)
-    
+    const success = status == 'Success';
+    const previewMessage = `${success ? ':white_check_mark:' : ':x:'} Deployment to ${environment} ${
+      success ? 'succeeded' : 'failed'
+    }.`;
+    console.log(previewMessage);
+
     const args = {
       channel: channelId,
       text: previewMessage,
       attachments,
-      icon_emoji: success ? ":white _check_mark:" : ":x:",
+      icon_emoji: success ? ':white _check_mark:' : ':x:',
     };
 
     if (messageId) {
