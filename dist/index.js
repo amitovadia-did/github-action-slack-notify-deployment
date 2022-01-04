@@ -6,25 +6,41 @@
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
+var __createBinding =
+  (this && this.__createBinding) ||
+  (Object.create
+    ? function(o, m, k, k2) {
+        if (k2 === undefined) k2 = k;
+        Object.defineProperty(o, k2, {
+          enumerable: true,
+          get: function() {
+            return m[k];
+          },
+        });
+      }
+    : function(o, m, k, k2) {
+        if (k2 === undefined) k2 = k;
+        o[k2] = m[k];
+      });
+var __setModuleDefault =
+  (this && this.__setModuleDefault) ||
+  (Object.create
+    ? function(o, v) {
+        Object.defineProperty(o, 'default', { enumerable: true, value: v });
+      }
+    : function(o, v) {
+        o['default'] = v;
+      });
+var __importStar =
+  (this && this.__importStar) ||
+  function(mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null)
+      for (var k in mod) if (k !== 'default' && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
-};
+  };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.issue = exports.issueCommand = void 0;
 const os = __importStar(__nccwpck_require__(2037));
@@ -40,63 +56,65 @@ const utils_1 = __nccwpck_require__(1245);
  *   ::set-env name=MY_VAR::some value
  */
 function issueCommand(command, properties, message) {
-    const cmd = new Command(command, properties, message);
-    process.stdout.write(cmd.toString() + os.EOL);
+  const cmd = new Command(command, properties, message);
+  process.stdout.write(cmd.toString() + os.EOL);
 }
 exports.issueCommand = issueCommand;
 function issue(name, message = '') {
-    issueCommand(name, {}, message);
+  issueCommand(name, {}, message);
 }
 exports.issue = issue;
 const CMD_STRING = '::';
 class Command {
-    constructor(command, properties, message) {
-        if (!command) {
-            command = 'missing.command';
-        }
-        this.command = command;
-        this.properties = properties;
-        this.message = message;
+  constructor(command, properties, message) {
+    if (!command) {
+      command = 'missing.command';
     }
-    toString() {
-        let cmdStr = CMD_STRING + this.command;
-        if (this.properties && Object.keys(this.properties).length > 0) {
-            cmdStr += ' ';
-            let first = true;
-            for (const key in this.properties) {
-                if (this.properties.hasOwnProperty(key)) {
-                    const val = this.properties[key];
-                    if (val) {
-                        if (first) {
-                            first = false;
-                        }
-                        else {
-                            cmdStr += ',';
-                        }
-                        cmdStr += `${key}=${escapeProperty(val)}`;
-                    }
-                }
+    this.command = command;
+    this.properties = properties;
+    this.message = message;
+  }
+  toString() {
+    let cmdStr = CMD_STRING + this.command;
+    if (this.properties && Object.keys(this.properties).length > 0) {
+      cmdStr += ' ';
+      let first = true;
+      for (const key in this.properties) {
+        if (this.properties.hasOwnProperty(key)) {
+          const val = this.properties[key];
+          if (val) {
+            if (first) {
+              first = false;
+            } else {
+              cmdStr += ',';
             }
+            cmdStr += `${key}=${escapeProperty(val)}`;
+          }
         }
-        cmdStr += `${CMD_STRING}${escapeData(this.message)}`;
-        return cmdStr;
+      }
     }
+    cmdStr += `${CMD_STRING}${escapeData(this.message)}`;
+    return cmdStr;
+  }
 }
 function escapeData(s) {
-    return utils_1.toCommandValue(s)
-        .replace(/%/g, '%25')
-        .replace(/\r/g, '%0D')
-        .replace(/\n/g, '%0A');
+  return utils_1
+    .toCommandValue(s)
+    .replace(/%/g, '%25')
+    .replace(/\r/g, '%0D')
+    .replace(/\n/g, '%0A');
 }
 function escapeProperty(s) {
-    return utils_1.toCommandValue(s)
-        .replace(/%/g, '%25')
-        .replace(/\r/g, '%0D')
-        .replace(/\n/g, '%0A')
-        .replace(/:/g, '%3A')
-        .replace(/,/g, '%2C');
+  return utils_1
+    .toCommandValue(s)
+    .replace(/%/g, '%25')
+    .replace(/\r/g, '%0D')
+    .replace(/\n/g, '%0A')
+    .replace(/:/g, '%3A')
+    .replace(/,/g, '%2C');
 }
 //# sourceMappingURL=command.js.map
+
 
 /***/ }),
 
@@ -105,34 +123,72 @@ function escapeProperty(s) {
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
+var __createBinding =
+  (this && this.__createBinding) ||
+  (Object.create
+    ? function(o, m, k, k2) {
+        if (k2 === undefined) k2 = k;
+        Object.defineProperty(o, k2, {
+          enumerable: true,
+          get: function() {
+            return m[k];
+          },
+        });
+      }
+    : function(o, m, k, k2) {
+        if (k2 === undefined) k2 = k;
+        o[k2] = m[k];
+      });
+var __setModuleDefault =
+  (this && this.__setModuleDefault) ||
+  (Object.create
+    ? function(o, v) {
+        Object.defineProperty(o, 'default', { enumerable: true, value: v });
+      }
+    : function(o, v) {
+        o['default'] = v;
+      });
+var __importStar =
+  (this && this.__importStar) ||
+  function(mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null)
+      for (var k in mod) if (k !== 'default' && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
+  };
+var __awaiter =
+  (this && this.__awaiter) ||
+  function(thisArg, _arguments, P, generator) {
+    function adopt(value) {
+      return value instanceof P
+        ? value
+        : new P(function(resolve) {
+            resolve(value);
+          });
+    }
+    return new (P || (P = Promise))(function(resolve, reject) {
+      function fulfilled(value) {
+        try {
+          step(generator.next(value));
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function rejected(value) {
+        try {
+          step(generator['throw'](value));
+        } catch (e) {
+          reject(e);
+        }
+      }
+      function step(result) {
+        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+      }
+      step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
-};
+  };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getState = exports.saveState = exports.group = exports.endGroup = exports.startGroup = exports.info = exports.notice = exports.warning = exports.error = exports.debug = exports.isDebug = exports.setFailed = exports.setCommandEcho = exports.setOutput = exports.getBooleanInput = exports.getMultilineInput = exports.getInput = exports.addPath = exports.setSecret = exports.exportVariable = exports.ExitCode = void 0;
 const command_1 = __nccwpck_require__(5604);
@@ -144,16 +200,16 @@ const path = __importStar(__nccwpck_require__(1017));
  * The code to exit an action
  */
 var ExitCode;
-(function (ExitCode) {
-    /**
-     * A code indicating that the action was successful
-     */
-    ExitCode[ExitCode["Success"] = 0] = "Success";
-    /**
-     * A code indicating that the action was a failure
-     */
-    ExitCode[ExitCode["Failure"] = 1] = "Failure";
-})(ExitCode = exports.ExitCode || (exports.ExitCode = {}));
+(function(ExitCode) {
+  /**
+   * A code indicating that the action was successful
+   */
+  ExitCode[(ExitCode['Success'] = 0)] = 'Success';
+  /**
+   * A code indicating that the action was a failure
+   */
+  ExitCode[(ExitCode['Failure'] = 1)] = 'Failure';
+})((ExitCode = exports.ExitCode || (exports.ExitCode = {})));
 //-----------------------------------------------------------------------
 // Variables
 //-----------------------------------------------------------------------
@@ -164,17 +220,16 @@ var ExitCode;
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function exportVariable(name, val) {
-    const convertedVal = utils_1.toCommandValue(val);
-    process.env[name] = convertedVal;
-    const filePath = process.env['GITHUB_ENV'] || '';
-    if (filePath) {
-        const delimiter = '_GitHubActionsFileCommandDelimeter_';
-        const commandValue = `${name}<<${delimiter}${os.EOL}${convertedVal}${os.EOL}${delimiter}`;
-        file_command_1.issueCommand('ENV', commandValue);
-    }
-    else {
-        command_1.issueCommand('set-env', { name }, convertedVal);
-    }
+  const convertedVal = utils_1.toCommandValue(val);
+  process.env[name] = convertedVal;
+  const filePath = process.env['GITHUB_ENV'] || '';
+  if (filePath) {
+    const delimiter = '_GitHubActionsFileCommandDelimeter_';
+    const commandValue = `${name}<<${delimiter}${os.EOL}${convertedVal}${os.EOL}${delimiter}`;
+    file_command_1.issueCommand('ENV', commandValue);
+  } else {
+    command_1.issueCommand('set-env', { name }, convertedVal);
+  }
 }
 exports.exportVariable = exportVariable;
 /**
@@ -182,7 +237,7 @@ exports.exportVariable = exportVariable;
  * @param secret value of the secret
  */
 function setSecret(secret) {
-    command_1.issueCommand('add-mask', {}, secret);
+  command_1.issueCommand('add-mask', {}, secret);
 }
 exports.setSecret = setSecret;
 /**
@@ -190,14 +245,13 @@ exports.setSecret = setSecret;
  * @param inputPath
  */
 function addPath(inputPath) {
-    const filePath = process.env['GITHUB_PATH'] || '';
-    if (filePath) {
-        file_command_1.issueCommand('PATH', inputPath);
-    }
-    else {
-        command_1.issueCommand('add-path', {}, inputPath);
-    }
-    process.env['PATH'] = `${inputPath}${path.delimiter}${process.env['PATH']}`;
+  const filePath = process.env['GITHUB_PATH'] || '';
+  if (filePath) {
+    file_command_1.issueCommand('PATH', inputPath);
+  } else {
+    command_1.issueCommand('add-path', {}, inputPath);
+  }
+  process.env['PATH'] = `${inputPath}${path.delimiter}${process.env['PATH']}`;
 }
 exports.addPath = addPath;
 /**
@@ -210,14 +264,14 @@ exports.addPath = addPath;
  * @returns   string
  */
 function getInput(name, options) {
-    const val = process.env[`INPUT_${name.replace(/ /g, '_').toUpperCase()}`] || '';
-    if (options && options.required && !val) {
-        throw new Error(`Input required and not supplied: ${name}`);
-    }
-    if (options && options.trimWhitespace === false) {
-        return val;
-    }
-    return val.trim();
+  const val = process.env[`INPUT_${name.replace(/ /g, '_').toUpperCase()}`] || '';
+  if (options && options.required && !val) {
+    throw new Error(`Input required and not supplied: ${name}`);
+  }
+  if (options && options.trimWhitespace === false) {
+    return val;
+  }
+  return val.trim();
 }
 exports.getInput = getInput;
 /**
@@ -229,10 +283,10 @@ exports.getInput = getInput;
  *
  */
 function getMultilineInput(name, options) {
-    const inputs = getInput(name, options)
-        .split('\n')
-        .filter(x => x !== '');
-    return inputs;
+  const inputs = getInput(name, options)
+    .split('\n')
+    .filter(x => x !== '');
+  return inputs;
 }
 exports.getMultilineInput = getMultilineInput;
 /**
@@ -246,15 +300,15 @@ exports.getMultilineInput = getMultilineInput;
  * @returns   boolean
  */
 function getBooleanInput(name, options) {
-    const trueValue = ['true', 'True', 'TRUE'];
-    const falseValue = ['false', 'False', 'FALSE'];
-    const val = getInput(name, options);
-    if (trueValue.includes(val))
-        return true;
-    if (falseValue.includes(val))
-        return false;
-    throw new TypeError(`Input does not meet YAML 1.2 "Core Schema" specification: ${name}\n` +
-        `Support boolean input list: \`true | True | TRUE | false | False | FALSE\``);
+  const trueValue = ['true', 'True', 'TRUE'];
+  const falseValue = ['false', 'False', 'FALSE'];
+  const val = getInput(name, options);
+  if (trueValue.includes(val)) return true;
+  if (falseValue.includes(val)) return false;
+  throw new TypeError(
+    `Input does not meet YAML 1.2 "Core Schema" specification: ${name}\n` +
+      `Support boolean input list: \`true | True | TRUE | false | False | FALSE\``
+  );
 }
 exports.getBooleanInput = getBooleanInput;
 /**
@@ -265,8 +319,8 @@ exports.getBooleanInput = getBooleanInput;
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function setOutput(name, value) {
-    process.stdout.write(os.EOL);
-    command_1.issueCommand('set-output', { name }, value);
+  process.stdout.write(os.EOL);
+  command_1.issueCommand('set-output', { name }, value);
 }
 exports.setOutput = setOutput;
 /**
@@ -275,7 +329,7 @@ exports.setOutput = setOutput;
  *
  */
 function setCommandEcho(enabled) {
-    command_1.issue('echo', enabled ? 'on' : 'off');
+  command_1.issue('echo', enabled ? 'on' : 'off');
 }
 exports.setCommandEcho = setCommandEcho;
 //-----------------------------------------------------------------------
@@ -287,8 +341,8 @@ exports.setCommandEcho = setCommandEcho;
  * @param message add error issue message
  */
 function setFailed(message) {
-    process.exitCode = ExitCode.Failure;
-    error(message);
+  process.exitCode = ExitCode.Failure;
+  error(message);
 }
 exports.setFailed = setFailed;
 //-----------------------------------------------------------------------
@@ -298,7 +352,7 @@ exports.setFailed = setFailed;
  * Gets whether Actions Step Debug is on or not
  */
 function isDebug() {
-    return process.env['RUNNER_DEBUG'] === '1';
+  return process.env['RUNNER_DEBUG'] === '1';
 }
 exports.isDebug = isDebug;
 /**
@@ -306,7 +360,7 @@ exports.isDebug = isDebug;
  * @param message debug message
  */
 function debug(message) {
-    command_1.issueCommand('debug', {}, message);
+  command_1.issueCommand('debug', {}, message);
 }
 exports.debug = debug;
 /**
@@ -315,7 +369,11 @@ exports.debug = debug;
  * @param properties optional properties to add to the annotation.
  */
 function error(message, properties = {}) {
-    command_1.issueCommand('error', utils_1.toCommandProperties(properties), message instanceof Error ? message.toString() : message);
+  command_1.issueCommand(
+    'error',
+    utils_1.toCommandProperties(properties),
+    message instanceof Error ? message.toString() : message
+  );
 }
 exports.error = error;
 /**
@@ -324,7 +382,11 @@ exports.error = error;
  * @param properties optional properties to add to the annotation.
  */
 function warning(message, properties = {}) {
-    command_1.issueCommand('warning', utils_1.toCommandProperties(properties), message instanceof Error ? message.toString() : message);
+  command_1.issueCommand(
+    'warning',
+    utils_1.toCommandProperties(properties),
+    message instanceof Error ? message.toString() : message
+  );
 }
 exports.warning = warning;
 /**
@@ -333,7 +395,11 @@ exports.warning = warning;
  * @param properties optional properties to add to the annotation.
  */
 function notice(message, properties = {}) {
-    command_1.issueCommand('notice', utils_1.toCommandProperties(properties), message instanceof Error ? message.toString() : message);
+  command_1.issueCommand(
+    'notice',
+    utils_1.toCommandProperties(properties),
+    message instanceof Error ? message.toString() : message
+  );
 }
 exports.notice = notice;
 /**
@@ -341,7 +407,7 @@ exports.notice = notice;
  * @param message info message
  */
 function info(message) {
-    process.stdout.write(message + os.EOL);
+  process.stdout.write(message + os.EOL);
 }
 exports.info = info;
 /**
@@ -352,14 +418,14 @@ exports.info = info;
  * @param name The name of the output group
  */
 function startGroup(name) {
-    command_1.issue('group', name);
+  command_1.issue('group', name);
 }
 exports.startGroup = startGroup;
 /**
  * End an output group.
  */
 function endGroup() {
-    command_1.issue('endgroup');
+  command_1.issue('endgroup');
 }
 exports.endGroup = endGroup;
 /**
@@ -371,17 +437,16 @@ exports.endGroup = endGroup;
  * @param fn The function to wrap in the group
  */
 function group(name, fn) {
-    return __awaiter(this, void 0, void 0, function* () {
-        startGroup(name);
-        let result;
-        try {
-            result = yield fn();
-        }
-        finally {
-            endGroup();
-        }
-        return result;
-    });
+  return __awaiter(this, void 0, void 0, function*() {
+    startGroup(name);
+    let result;
+    try {
+      result = yield fn();
+    } finally {
+      endGroup();
+    }
+    return result;
+  });
 }
 exports.group = group;
 //-----------------------------------------------------------------------
@@ -395,7 +460,7 @@ exports.group = group;
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function saveState(name, value) {
-    command_1.issueCommand('save-state', { name }, value);
+  command_1.issueCommand('save-state', { name }, value);
 }
 exports.saveState = saveState;
 /**
@@ -405,10 +470,11 @@ exports.saveState = saveState;
  * @returns   string
  */
 function getState(name) {
-    return process.env[`STATE_${name}`] || '';
+  return process.env[`STATE_${name}`] || '';
 }
 exports.getState = getState;
 //# sourceMappingURL=core.js.map
+
 
 /***/ }),
 
@@ -418,25 +484,41 @@ exports.getState = getState;
 "use strict";
 
 // For internal use, subject to change.
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
+var __createBinding =
+  (this && this.__createBinding) ||
+  (Object.create
+    ? function(o, m, k, k2) {
+        if (k2 === undefined) k2 = k;
+        Object.defineProperty(o, k2, {
+          enumerable: true,
+          get: function() {
+            return m[k];
+          },
+        });
+      }
+    : function(o, m, k, k2) {
+        if (k2 === undefined) k2 = k;
+        o[k2] = m[k];
+      });
+var __setModuleDefault =
+  (this && this.__setModuleDefault) ||
+  (Object.create
+    ? function(o, v) {
+        Object.defineProperty(o, 'default', { enumerable: true, value: v });
+      }
+    : function(o, v) {
+        o['default'] = v;
+      });
+var __importStar =
+  (this && this.__importStar) ||
+  function(mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null)
+      for (var k in mod) if (k !== 'default' && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
-};
+  };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.issueCommand = void 0;
 // We use any as a valid input type
@@ -445,19 +527,20 @@ const fs = __importStar(__nccwpck_require__(7147));
 const os = __importStar(__nccwpck_require__(2037));
 const utils_1 = __nccwpck_require__(1245);
 function issueCommand(command, message) {
-    const filePath = process.env[`GITHUB_${command}`];
-    if (!filePath) {
-        throw new Error(`Unable to find environment variable for file command ${command}`);
-    }
-    if (!fs.existsSync(filePath)) {
-        throw new Error(`Missing file at path: ${filePath}`);
-    }
-    fs.appendFileSync(filePath, `${utils_1.toCommandValue(message)}${os.EOL}`, {
-        encoding: 'utf8'
-    });
+  const filePath = process.env[`GITHUB_${command}`];
+  if (!filePath) {
+    throw new Error(`Unable to find environment variable for file command ${command}`);
+  }
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`Missing file at path: ${filePath}`);
+  }
+  fs.appendFileSync(filePath, `${utils_1.toCommandValue(message)}${os.EOL}`, {
+    encoding: 'utf8',
+  });
 }
 exports.issueCommand = issueCommand;
 //# sourceMappingURL=file-command.js.map
+
 
 /***/ }),
 
@@ -475,13 +558,12 @@ exports.toCommandProperties = exports.toCommandValue = void 0;
  * @param input input to sanitize into a string
  */
 function toCommandValue(input) {
-    if (input === null || input === undefined) {
-        return '';
-    }
-    else if (typeof input === 'string' || input instanceof String) {
-        return input;
-    }
-    return JSON.stringify(input);
+  if (input === null || input === undefined) {
+    return '';
+  } else if (typeof input === 'string' || input instanceof String) {
+    return input;
+  }
+  return JSON.stringify(input);
 }
 exports.toCommandValue = toCommandValue;
 /**
@@ -491,19 +573,20 @@ exports.toCommandValue = toCommandValue;
  * See IssueCommandProperties: https://github.com/actions/runner/blob/main/src/Runner.Worker/ActionCommandManager.cs#L646
  */
 function toCommandProperties(annotationProperties) {
-    if (!Object.keys(annotationProperties).length) {
-        return {};
-    }
-    return {
-        title: annotationProperties.title,
-        line: annotationProperties.startLine,
-        endLine: annotationProperties.endLine,
-        col: annotationProperties.startColumn,
-        endColumn: annotationProperties.endColumn
-    };
+  if (!Object.keys(annotationProperties).length) {
+    return {};
+  }
+  return {
+    title: annotationProperties.title,
+    line: annotationProperties.startLine,
+    endLine: annotationProperties.endLine,
+    col: annotationProperties.startColumn,
+    endColumn: annotationProperties.endColumn,
+  };
 }
 exports.toCommandProperties = toCommandProperties;
 //# sourceMappingURL=utils.js.map
+
 
 /***/ }),
 
@@ -516,46 +599,48 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const fs_1 = __nccwpck_require__(7147);
 const os_1 = __nccwpck_require__(2037);
 class Context {
-    /**
-     * Hydrate the context from the environment
-     */
-    constructor() {
-        this.payload = {};
-        if (process.env.GITHUB_EVENT_PATH) {
-            if (fs_1.existsSync(process.env.GITHUB_EVENT_PATH)) {
-                this.payload = JSON.parse(fs_1.readFileSync(process.env.GITHUB_EVENT_PATH, { encoding: 'utf8' }));
-            }
-            else {
-                process.stdout.write(`GITHUB_EVENT_PATH ${process.env.GITHUB_EVENT_PATH} does not exist${os_1.EOL}`);
-            }
-        }
-        this.eventName = process.env.GITHUB_EVENT_NAME;
-        this.sha = process.env.GITHUB_SHA;
-        this.ref = process.env.GITHUB_REF;
-        this.workflow = process.env.GITHUB_WORKFLOW;
-        this.action = process.env.GITHUB_ACTION;
-        this.actor = process.env.GITHUB_ACTOR;
+  /**
+   * Hydrate the context from the environment
+   */
+  constructor() {
+    this.payload = {};
+    if (process.env.GITHUB_EVENT_PATH) {
+      if (fs_1.existsSync(process.env.GITHUB_EVENT_PATH)) {
+        this.payload = JSON.parse(fs_1.readFileSync(process.env.GITHUB_EVENT_PATH, { encoding: 'utf8' }));
+      } else {
+        process.stdout.write(`GITHUB_EVENT_PATH ${process.env.GITHUB_EVENT_PATH} does not exist${os_1.EOL}`);
+      }
     }
-    get issue() {
-        const payload = this.payload;
-        return Object.assign(Object.assign({}, this.repo), { number: (payload.issue || payload.pullRequest || payload).number });
+    this.eventName = process.env.GITHUB_EVENT_NAME;
+    this.sha = process.env.GITHUB_SHA;
+    this.ref = process.env.GITHUB_REF;
+    this.workflow = process.env.GITHUB_WORKFLOW;
+    this.action = process.env.GITHUB_ACTION;
+    this.actor = process.env.GITHUB_ACTOR;
+  }
+  get issue() {
+    const payload = this.payload;
+    return Object.assign(Object.assign({}, this.repo), {
+      number: (payload.issue || payload.pullRequest || payload).number,
+    });
+  }
+  get repo() {
+    if (process.env.GITHUB_REPOSITORY) {
+      const [owner, repo] = process.env.GITHUB_REPOSITORY.split('/');
+      return { owner, repo };
     }
-    get repo() {
-        if (process.env.GITHUB_REPOSITORY) {
-            const [owner, repo] = process.env.GITHUB_REPOSITORY.split('/');
-            return { owner, repo };
-        }
-        if (this.payload.repository) {
-            return {
-                owner: this.payload.repository.owner.login,
-                repo: this.payload.repository.name
-            };
-        }
-        throw new Error("context.repo requires a GITHUB_REPOSITORY environment variable like 'owner/repo'");
+    if (this.payload.repository) {
+      return {
+        owner: this.payload.repository.owner.login,
+        repo: this.payload.repository.name,
+      };
     }
+    throw new Error("context.repo requires a GITHUB_REPOSITORY environment variable like 'owner/repo'");
+  }
 }
 exports.Context = Context;
 //# sourceMappingURL=context.js.map
+
 
 /***/ }),
 
@@ -564,16 +649,20 @@ exports.Context = Context;
 
 "use strict";
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-var __importStar = (this && this.__importStar) || function (mod) {
+var __importDefault =
+  (this && this.__importDefault) ||
+  function(mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+var __importStar =
+  (this && this.__importStar) ||
+  function(mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
     if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
+    result['default'] = mod;
     return result;
-};
+  };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 // Originally pulled from https://github.com/JasonEtco/actions-toolkit/blob/master/src/github.ts
 const graphql_1 = __nccwpck_require__(583);
@@ -583,15 +672,16 @@ const Context = __importStar(__nccwpck_require__(5210));
 rest_1.default.prototype = new rest_1.default();
 exports.context = new Context.Context();
 class GitHub extends rest_1.default {
-    constructor(token, opts = {}) {
-        super(Object.assign(Object.assign({}, opts), { auth: `token ${token}` }));
-        this.graphql = graphql_1.defaults({
-            headers: { authorization: `token ${token}` }
-        });
-    }
+  constructor(token, opts = {}) {
+    super(Object.assign(Object.assign({}, opts), { auth: `token ${token}` }));
+    this.graphql = graphql_1.defaults({
+      headers: { authorization: `token ${token}` },
+    });
+  }
 }
 exports.GitHub = GitHub;
 //# sourceMappingURL=github.js.map
+
 
 /***/ }),
 
@@ -32578,7 +32668,7 @@ function buildSlackAttachments({ status, color, tag, projectName, actor, repoUrl
         {
           title: 'Tag',
           value: tag ? `<${repoUrl}/commit/${tag} | ${tag}>` : 'no tag',
-          short: false,
+          short: true,
         },
         {
           title: 'Initiated by',
