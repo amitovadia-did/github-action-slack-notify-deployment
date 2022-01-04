@@ -20,8 +20,8 @@ function buildSlackAttachments({ status, color, tag, projectName, actor, repoUrl
         },
         {
           title: 'Tag',
-          value: tag ? `<${repoUrl}/commit/${tag} | ${tag}>` : 'no tag',
-          short: true,
+          value: tag ? `<${repoUrl}/commit/${tag} | ${tag.substring(0, 7)}>` : 'no tag',
+          short: false,
         },
         {
           title: 'Initiated by',
