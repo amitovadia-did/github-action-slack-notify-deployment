@@ -32647,7 +32647,7 @@ function wrappy (fn, cb) {
 
 const { context } = __nccwpck_require__(3134);
 
-function buildSlackAttachments({ status, color, tag, projectName, actor, repoUrl, message, environment }) {
+function buildSlackAttachments({ status, color, commit, projectName, actor, repoUrl, environment }) {
   const { owner, repo } = context.repo;
   repoUrl = repoUrl || `https://github.com/${owner}/${repo}`;
 
@@ -32666,8 +32666,8 @@ function buildSlackAttachments({ status, color, tag, projectName, actor, repoUrl
           short: false,
         },
         {
-          title: 'Tag',
-          value: tag ? `<${repoUrl}/commit/${tag} | ${tag.substring(0, 7)}>` : 'no tag',
+          title: 'Commit',
+          value: tag ? `<${repoUrl}/commit/${commit} | ${commit.substring(0, 7)}>` : 'no tag',
           short: false,
         },
         {
@@ -32678,11 +32678,6 @@ function buildSlackAttachments({ status, color, tag, projectName, actor, repoUrl
         {
           title: 'Status',
           value: `<https://github.com/${owner}/${repo}/actions/runs/${process.env.GITHUB_RUN_ID} | ${status}>`,
-          short: false,
-        },
-        {
-          title: 'Message',
-          value: message,
           short: false,
         },
       ],
@@ -32915,10 +32910,9 @@ const { buildSlackAttachments, formatChannelName } = __nccwpck_require__(743);
     const status = core.getInput('status');
     const color = core.getInput('color');
     const messageId = core.getInput('message_id');
-    const tag = core.getInput('tag');
+    const commit = core.getInput('commit');
     const projectName = core.getInput('project_name');
     const actor = core.getInput('actor');
-    const message = core.getInput('message');
     const environment = core.getInput('environment');
     const repoUrl = core.getInput('repo_url');
     const token = process.env.SLACK_BOT_TOKEN;
@@ -32932,11 +32926,10 @@ const { buildSlackAttachments, formatChannelName } = __nccwpck_require__(743);
     const attachments = buildSlackAttachments({
       status,
       color,
-      tag,
+      commit,
       projectName,
       actor,
       repoUrl,
-      message,
       environment,
     });
     const channelId = core.getInput('channel_id') || (await lookUpChannelId({ slack, channel }));

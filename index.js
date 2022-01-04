@@ -8,10 +8,9 @@ const { buildSlackAttachments, formatChannelName } = require('./src/utils');
     const status = core.getInput('status');
     const color = core.getInput('color');
     const messageId = core.getInput('message_id');
-    const tag = core.getInput('tag');
+    const commit = core.getInput('commit');
     const projectName = core.getInput('project_name');
     const actor = core.getInput('actor');
-    const message = core.getInput('message');
     const environment = core.getInput('environment');
     const repoUrl = core.getInput('repo_url');
     const token = process.env.SLACK_BOT_TOKEN;
@@ -25,11 +24,10 @@ const { buildSlackAttachments, formatChannelName } = require('./src/utils');
     const attachments = buildSlackAttachments({
       status,
       color,
-      tag,
+      commit,
       projectName,
       actor,
       repoUrl,
-      message,
       environment,
     });
     const channelId = core.getInput('channel_id') || (await lookUpChannelId({ slack, channel }));
@@ -40,15 +38,17 @@ const { buildSlackAttachments, formatChannelName } = require('./src/utils');
     }
 
     const apiMethod = Boolean(messageId) ? 'update' : 'postMessage';
-    const success = status == 'Success'
-    const previewMessage = `${success ? ":white_check_mark:" : ":x:"} Deployment to ${environment} ${success ? "succeeded" : "failed"}.`
-    console.log(previewMessage)
-    
+    const success = status == 'Success';
+    const previewMessage = `${success ? ':white_check_mark:' : ':x:'} Deployment to ${environment} ${
+      success ? 'succeeded' : 'failed'
+    }.`;
+    console.log(previewMessage);
+
     const args = {
       channel: channelId,
       text: previewMessage,
       attachments,
-      icon_emoji: success ? ":white _check_mark:" : ":x:",
+      icon_emoji: success ? ':white _check_mark:' : ':x:',
     };
 
     if (messageId) {
